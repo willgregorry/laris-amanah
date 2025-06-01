@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
 import { Container, Form, Button, Alert } from "react-bootstrap";
 import { redirect, useNavigate, useNavigation } from "react-router-dom";
@@ -8,6 +9,7 @@ function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
   const [errorMsg, setErrorMsg] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email_pengguna: "",
     kata_sandi: "",
@@ -87,13 +89,13 @@ function AuthForm() {
 
         {showAlert && (
           <Alert
-            style={{height: "75px"}}
+            style={{ height: "75px" }}
             variant="danger"
             dismissible
             onClose={() => setShowAlert(false)}
           >
-            <Alert.Heading style={{fontSize: "16px"}}>Error!</Alert.Heading>
-            <p style={{fontSize: "12px"}}>{errorMsg}</p>
+            <Alert.Heading style={{ fontSize: "16px" }}>Error!</Alert.Heading>
+            <p style={{ fontSize: "12px" }}>{errorMsg}</p>
           </Alert>
         )}
 
@@ -109,15 +111,40 @@ function AuthForm() {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3">
+          {/* <Form.Group className="mb-3">
             <Form.Label>Password</Form.Label>
             <Form.Control
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Masukkan password"
               name="kata_sandi"
               value={formData.kata_sandi}
               onChange={handleChange}
             />
+          </Form.Group> */}
+
+          <Form.Group className="mb-3" style={{ position: "relative" }}>
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type={showPassword ? "text" : "password"}
+              placeholder="Masukkan password"
+              name="kata_sandi"
+              value={formData.kata_sandi}
+              onChange={handleChange}
+            />
+            <div
+              onClick={() => setShowPassword(!showPassword)}
+              style={{
+                position: "absolute",
+                top: "73%",
+                right: "10px",
+                transform: "translateY(-50%)",
+                cursor: "pointer",
+                color: "#16423C",
+                userSelect: "none",
+              }}
+            >
+              {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+            </div>
           </Form.Group>
 
           <Button
