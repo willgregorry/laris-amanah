@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AuthForm from './Auth/AuthForm';
-import MainBackground from './Components/MainBackground';
+import Dashboard from './Pages/Dashboard';
 
 function App() {
   return (
@@ -9,8 +9,7 @@ function App() {
       <Routes>
         <Route path="/" element={<AuthForm/>}/>
         <Route path="/authentication" element={<AuthForm />} />
-        <Route path="/mainbackground" element={<MainBackground />} />
-
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );

@@ -34,9 +34,10 @@ function AuthForm() {
     setErrorMsg(null);
     setShowAlert(false);
 
-    const endpoint = "https://bbxlsmbl-8000.asse.devtunnels.ms/user/login/";
+    const endpoint = `${import.meta.env.VITE_API_BASE_URL}/user/login/`;
 
     try {
+
       const response = await axios.post(endpoint, formData, {
         headers: {
           "Content-Type": "application/json",
@@ -47,8 +48,10 @@ function AuthForm() {
       console.log("Success:", result);
 
       localStorage.setItem("authToken", result.token);
+      localStorage.setItem("profile_name", result.name);
 
-      navigate("/mainbackground");
+      navigate("/dashboard");
+      
     } catch (err) {
       console.error("Submission error:", err);
 
