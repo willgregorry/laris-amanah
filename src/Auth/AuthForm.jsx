@@ -11,8 +11,8 @@ function AuthForm() {
   const [showAlert, setShowAlert] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    email_pengguna: "",
-    kata_sandi: "",
+    email: "",
+    password: "",
   });
 
   const colors = {
@@ -105,30 +105,19 @@ function AuthForm() {
             <Form.Control
               type="email"
               placeholder="Masukkan email"
-              name="email_pengguna"
-              value={formData.email_pengguna}
+              name="email"
+              value={formData.email}
               onChange={handleChange}
             />
           </Form.Group>
-
-          {/* <Form.Group className="mb-3">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type={showPassword ? "text" : "password"}
-              placeholder="Masukkan password"
-              name="kata_sandi"
-              value={formData.kata_sandi}
-              onChange={handleChange}
-            />
-          </Form.Group> */}
 
           <Form.Group className="mb-3" style={{ position: "relative" }}>
             <Form.Label>Password</Form.Label>
             <Form.Control
               type={showPassword ? "text" : "password"}
               placeholder="Masukkan password"
-              name="kata_sandi"
-              value={formData.kata_sandi}
+              name="password"
+              value={formData.password}
               onChange={handleChange}
             />
             <div
