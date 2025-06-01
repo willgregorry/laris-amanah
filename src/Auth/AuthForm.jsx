@@ -66,7 +66,7 @@ function AuthForm() {
     <div
       style={{
         minHeight: "100vh",
-        backgroundColor: colors.background,
+        background: "linear-gradient(45deg, #16423C, #6A9C89)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
