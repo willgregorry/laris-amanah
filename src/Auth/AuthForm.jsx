@@ -1,97 +1,110 @@
-import React, { useState } from 'react';
-import { Container, Form, Button } from 'react-bootstrap';
+import React, { useState } from "react";
+import axios from "axios";
+import { Container, Form, Button, Alert } from "react-bootstrap";
+import { redirect, useNavigate, useNavigation } from "react-router-dom";
 
 function AuthForm() {
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
+  const [errorMsg, setErrorMsg] = useState(null);
+  const [showAlert, setShowAlert] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
+    email_pengguna: "",
+    kata_sandi: "",
   });
 
   const colors = {
-    background: '#16423C',
-    box: '#E9EFEC',
-    button: '#16423C',
-    text: '#333'
+    background: "#16423C",
+    box: "#E9EFEC",
+    button: "#16423C",
+    text: "#333",
   };
 
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMsg(null);
+    setShowAlert(false);
 
-    const endpoint = isLogin ? '/api/login' : '/api/register';
+    const endpoint = "https://bbxlsmbl-8000.asse.devtunnels.ms/user/login/";
 
     try {
-      const res = await fetch(endpoint, {
-        method: 'POST',
+      const response = await axios.post(endpoint, formData, {
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData)
       });
 
-      const result = await res.json();
-      console.log('Server Response:', result);
-      // Handle success / error messages here
+      const result = response.data;
+      console.log("Success:", result);
 
+      localStorage.setItem("authToken", result.token);
+
+      navigate("/mainbackground");
     } catch (err) {
-      console.error('Submission error:', err);
+      console.error("Submission error:", err);
+
+      if (err.response && err.response.data) {
+        setErrorMsg("Account not found!");
+        setShowAlert(true);
+      } else {
+        setErrorMsg("Terjadi kesalahan saat mengirim data.");
+        setShowAlert(true);
+      }
     }
   };
 
   return (
     <div
       style={{
-        minHeight: '100vh',
+        minHeight: "100vh",
         backgroundColor: colors.background,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
       <Container
         style={{
-          maxWidth: '400px',
+          maxWidth: "400px",
           backgroundColor: colors.box,
-          padding: '30px',
-          borderRadius: '16px',
-          boxShadow: '0 8px 20px rgba(0, 0, 0, 0.1)',
-          fontFamily: 'Poppins, sans-serif'
+          padding: "30px",
+          borderRadius: "16px",
+          boxShadow: "0 8px 20px rgba(0, 0, 0, 0.1)",
+          fontFamily: "Poppins, sans-serif",
         }}
       >
-        <h3 style={{ textAlign: 'center', marginBottom: '20px', color: colors.text }}>
-          {isLogin ? 'Login' : 'Register'}
-        </h3>
+        <h3 style={{ marginBottom: "12px", color: colors.text }}>Login</h3>
+        <p style={{ color: "gray", fontSize: "14px" }}>
+          Gunakan email dan kata sandi Anda untuk mengakses akun!
+        </p>
+
+        {showAlert && (
+          <Alert
+            style={{height: "75px"}}
+            variant="danger"
+            dismissible
+            onClose={() => setShowAlert(false)}
+          >
+            <Alert.Heading style={{fontSize: "16px"}}>Error!</Alert.Heading>
+            <p style={{fontSize: "12px"}}>{errorMsg}</p>
+          </Alert>
+        )}
 
         <Form onSubmit={handleSubmit}>
-          {!isLogin && (
-            <Form.Group className="mb-3">
-              <Form.Label>Full Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter your name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-              />
-            </Form.Group>
-          )}
-
           <Form.Group className="mb-3">
-            <Form.Label>Email address</Form.Label>
+            <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
-              placeholder="Enter email"
-              name="email"
-              value={formData.email}
+              placeholder="Masukkan email"
+              name="email_pengguna"
+              value={formData.email_pengguna}
               onChange={handleChange}
             />
           </Form.Group>
@@ -100,50 +113,25 @@ function AuthForm() {
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
-              placeholder="Password"
-              name="password"
-              value={formData.password}
+              placeholder="Masukkan password"
+              name="kata_sandi"
+              value={formData.kata_sandi}
               onChange={handleChange}
             />
           </Form.Group>
 
-          {!isLogin && (
-            <Form.Group className="mb-3">
-              <Form.Label>Confirm Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Confirm password"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-              />
-            </Form.Group>
-          )}
-
           <Button
             type="submit"
             style={{
-              width: '100%',
+              width: "100%",
               backgroundColor: colors.button,
-              border: 'none',
-              marginTop: '10px'
+              border: "none",
+              marginTop: "10px",
             }}
           >
-            {isLogin ? 'Login' : 'Register'}
+            Login
           </Button>
         </Form>
-
-        <div style={{ textAlign: 'center', marginTop: '20px' }}>
-          <span style={{ color: colors.text }}>
-            {isLogin ? "Don't have an account?" : 'Already have an account?'}{' '}
-            <span
-              style={{ color: '#007bff', cursor: 'pointer' }}
-              onClick={() => setIsLogin(!isLogin)}
-            >
-              {isLogin ? 'Register' : 'Login'}
-            </span>
-          </span>
-        </div>
       </Container>
     </div>
   );
