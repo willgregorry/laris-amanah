@@ -1,5 +1,6 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
+import { TbReportSearch } from "react-icons/tb";
 import Navbar from "react-bootstrap/Navbar";
 import { redirect, useNavigate } from "react-router-dom";
 
@@ -59,50 +60,60 @@ export default function Header() {
               {formattedDate}
             </p>
           </div>
-          <div
+
+          <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+          {/* Report Button */}
+          <Nav.Link
+            onClick={() => navigate("/report")}
             className="shadow"
             style={{
-              backgroundColor: "rgb(228, 236, 231)",
-              width: "175px",
-              height: "45px",
-              borderRadius: "2em",
-              border: "2px solid #E9EFEC",
+              fontFamily: "Poppins",
+              backgroundColor: "#E9EFEC",
+              padding: "4px 12px",
+              borderRadius: "12px",
+              display: "flex",
+              alignItems: "center",
+              gap: "4px",
+              height: "30px"
             }}
           >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                margin: "4px",
-                width: "35px",
-                height: "35px",
-              }}
-            >
+            <TbReportSearch />
+            <span>Report</span>
+          </Nav.Link>
+
+          {/* Profile Section */}
+          <div className="shadow" style={{
+            backgroundColor: "rgb(228, 236, 231)",
+            height: "45px",
+            borderRadius: "2em",
+            border: "2px solid #E9EFEC",
+            display: "flex",
+            alignItems: "center",
+            padding: "0 8px"
+          }}>
+            <div style={{ display: "flex", alignItems: "center" }}>
               <img
-                src="sulthan.jpg"
-                alt=""
+                src={localStorage.getItem("image")}
+                alt="pfp"
                 className="rounded-5"
                 style={{
-                  width: "100px",
+                  width: "35px",
                   height: "35px",
                   border: "2px solid #16423C",
                 }}
               />
-              <p
-                style={{
-                  marginTop: "4px",
-                  marginLeft: "12px",
-                  fontSize: "16px",
-                  fontFamily: "poppins",
-                }}
-              >
+              <p style={{
+                marginLeft: "12px",
+                marginTop: '14px',
+                marginRight: '8px',
+                fontSize: "16px",
+                fontFamily: "Poppins",
+              }}>
                 {localStorage.getItem("profile_name")}
               </p>
-              <div>
-                <p></p>
-              </div>
             </div>
           </div>
+        </div>
         </Container>
       </Navbar>
     </div>

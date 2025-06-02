@@ -37,7 +37,6 @@ function AuthForm() {
     const endpoint = `${import.meta.env.VITE_API_BASE_URL}/user/login/`;
 
     try {
-
       const response = await axios.post(endpoint, formData, {
         headers: {
           "Content-Type": "application/json",
@@ -50,8 +49,14 @@ function AuthForm() {
       localStorage.setItem("authToken", result.token);
       localStorage.setItem("profile_name", result.name);
 
+      if (result.name === "Sulthan") {
+        localStorage.setItem("image", "sulthan.jpg");
+      }
+      if (result.name === "Fayyaz") {
+        localStorage.setItem("image", "fayyaz.jpg");
+      }
+
       navigate("/dashboard");
-      
     } catch (err) {
       console.error("Submission error:", err);
 
@@ -85,6 +90,7 @@ function AuthForm() {
           fontFamily: "Poppins, sans-serif",
         }}
       >
+        <img src="logo.png" alt="logo" width={50} style={{marginBottom: '12px'}}/>
         <h3 style={{ marginBottom: "12px", color: colors.text }}>Login</h3>
         <p style={{ color: "gray", fontSize: "14px" }}>
           Gunakan email dan kata sandi Anda untuk mengakses akun!

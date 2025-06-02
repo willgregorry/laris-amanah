@@ -6,10 +6,17 @@ import data from "./../data.json"; // Import the data here
 function Dashboard() {
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Filter data based on search term
-  const filteredData = data.filter(item =>
-    item.nama_barang.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredData = data.filter((item) => {
+    const nameMatch = item.nama_barang.toLowerCase().includes(searchTerm.toLowerCase());
+    const kodeMatch = item.kode_barang.toLowerCase().includes(searchTerm.toLowerCase());
+    const satuanMatch = item.satuan.toLowerCase().includes(searchTerm.toLowerCase());
+
+    const priceAsNumber = Number(searchTerm.replace(/[^0-9]/g, ""));
+    const priceMatch =
+      !isNaN(priceAsNumber) && item.harga_satuan === priceAsNumber;
+
+    return nameMatch || priceMatch || kodeMatch || satuanMatch;
+  });
 
   return (
     <div
@@ -31,13 +38,13 @@ function Dashboard() {
 
       <input
         type="text"
-        placeholder="Cari nama barang..."
+        placeholder="Cari ..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         style={{
-          fontFamily: 'Poppins',
-          borderRadius: '8px',
-          height: '30px',
+          fontFamily: "Poppins",
+          borderRadius: "8px",
+          height: "30px",
           marginBottom: "16px",
           padding: "8px",
           width: "1115px",

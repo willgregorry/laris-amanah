@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AuthForm from './Auth/AuthForm';
 import Dashboard from './Pages/Dashboard';
-import TableSearch from './Components/TableSearch'
+import Report from './Pages/Report';
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
         <Route path="/" element={<AuthForm/>}/>
         <Route path="/authentication" element={<AuthForm />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/tablesearch" element={<TableSearch />} />
+        <Route path="/report" element={<Report />}/>
       </Routes>
     </Router>
   );

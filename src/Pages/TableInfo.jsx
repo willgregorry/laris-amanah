@@ -31,21 +31,21 @@ export default function TableInfo({ data }) {
               style={{
                 width: "50px",
                 padding: "12px",
-                border: "1px solid #",
-                textAlign: "left",
+                border: "1px solid #ddd",
+                textAlign: "center",
               }}
             >
               ID
             </th>
             <th
               style={{
-                width: "95px",
+                width: "120px",
                 padding: "12px",
                 border: "1px solid #ddd",
-                textAlign: "left",
+                textAlign: "center",
               }}
             >
-              Kode Brg.
+              Kode Barang
             </th>
             <th
               style={{
@@ -54,13 +54,13 @@ export default function TableInfo({ data }) {
                 textAlign: "left",
               }}
             >
-              Nama Brg.
+              Nama Barang
             </th>
             <th
               style={{
                 padding: "12px",
                 border: "1px solid #ddd",
-                textAlign: "left",
+                textAlign: "center",
               }}
             >
               Satuan
@@ -70,7 +70,7 @@ export default function TableInfo({ data }) {
                 width: "15%",
                 padding: "12px",
                 border: "1px solid #ddd",
-                textAlign: "left",
+                textAlign: "center",
               }}
             >
               Harga Satuan
@@ -80,7 +80,7 @@ export default function TableInfo({ data }) {
                 width: "15%",
                 padding: "12px",
                 border: "1px solid #ddd",
-                textAlign: "left",
+                textAlign: "center",
               }}
             >
               Action
@@ -104,10 +104,10 @@ export default function TableInfo({ data }) {
               <td style={{ padding: "12px", border: "1px solid #ddd" }}>
                 {row.nama_barang}
               </td>
-              <td style={{ padding: "12px", border: "1px solid #ddd" }}>
+              <td style={{ padding: "12px", border: "1px solid #ddd", textAlign: "center",}}>
                 {row.satuan}
               </td>
-              <td style={{ padding: "12px", border: "1px solid #ddd" }}>
+              <td style={{ padding: "12px", border: "1px solid #ddd", textAlign: "center",}}>
                 {"Rp " + row.harga_satuan.toLocaleString("id-ID") + ",00"}
               </td>
               <td style={{ padding: "12px", border: "1px solid #ddd" }}></td>
