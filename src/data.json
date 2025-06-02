@@ -1,7 +1,247 @@
 [
     {
-        "img_src": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.surlatable.com%2Fperfect-pizza-dough%2FREC-283110.html&psig=AOvVaw3HMsayXZWYyu_5ZXYBsIbg&ust=1748775927548000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCJCO_LzIzY0DFQAAAAAdAAAAABAE",
-        "nama": "Farm Villa",
-        "price": 8.0
+      "id": 1,
+      "kode_barang": "A300A",
+      "nama_barang": "Besi Beton A300 10mm",
+      "satuan": "pcs",
+      "harga_satuan": 20000
+    },
+    {
+      "id": 2,
+      "kode_barang": "ADT",
+      "nama_barang": "Angkur Dinding Tipe Standar",
+      "satuan": "pcs",
+      "harga_satuan": 5000
+    },
+    {
+      "id": 3,
+      "kode_barang": "ADT1",
+      "nama_barang": "Angkur Dinding Tipe 1",
+      "satuan": "kaleng",
+      "harga_satuan": 15000
+    },
+    {
+      "id": 4,
+      "kode_barang": "AFBCPA",
+      "nama_barang": "Paku Beton Cap Ayam",
+      "satuan": "pcs",
+      "harga_satuan": 3000
+    },
+    {
+      "id": 5,
+      "kode_barang": "AFBCPP",
+      "nama_barang": "Paku Beton Cap Padi",
+      "satuan": "pcs",
+      "harga_satuan": 3000
+    },
+    {
+      "id": 6,
+      "kode_barang": "AFKMAL",
+      "nama_barang": "Alumunium Foil KMAL",
+      "satuan": "pcs",
+      "harga_satuan": 8000
+    },
+    {
+      "id": 7,
+      "kode_barang": "AFKMK",
+      "nama_barang": "Alumunium Foil KMK",
+      "satuan": "pcs",
+      "harga_satuan": 8000
+    },
+    {
+      "id": 8,
+      "kode_barang": "AFKMS",
+      "nama_barang": "Alumunium Foil KMS",
+      "satuan": "pcs",
+      "harga_satuan": 8000
+    },
+    {
+      "id": 9,
+      "kode_barang": "AFKMSF",
+      "nama_barang": "Alumunium Foil KMS Finishing",
+      "satuan": "pcs",
+      "harga_satuan": 9000
+    },
+    {
+      "id": 10,
+      "kode_barang": "AFKMYSK",
+      "nama_barang": "Alumunium Foil YSK",
+      "satuan": "pcs",
+      "harga_satuan": 8500
+    },
+    {
+      "id": 11,
+      "kode_barang": "AFU122",
+      "nama_barang": "Triplek Lapis U122",
+      "satuan": "lembar",
+      "harga_satuan": 45000
+    },
+    {
+      "id": 12,
+      "kode_barang": "AFWK",
+      "nama_barang": "Wiremesh Kecil AFWK",
+      "satuan": "pcs",
+      "harga_satuan": 40000
+    },
+    {
+      "id": 13,
+      "kode_barang": "ALFA1",
+      "nama_barang": "Cat Tembok ALFA1",
+      "satuan": "kaleng",
+      "harga_satuan": 85000
+    },
+    {
+      "id": 14,
+      "kode_barang": "ALFA1/4",
+      "nama_barang": "Cat Tembok ALFA1/4",
+      "satuan": "kaleng",
+      "harga_satuan": 45000
+    },
+    {
+      "id": 15,
+      "kode_barang": "ALFA14",
+      "nama_barang": "Cat Tembok ALFA14",
+      "satuan": "kaleng",
+      "harga_satuan": 40000
+    },
+    {
+      "id": 16,
+      "kode_barang": "ALFAG",
+      "nama_barang": "Cat Tembok ALFAG",
+      "satuan": "kaleng",
+      "harga_satuan": 40000
+    },
+    {
+      "id": 17,
+      "kode_barang": "ALKAVK",
+      "nama_barang": "Alkali Kavling",
+      "satuan": "kaleng",
+      "harga_satuan": 60000
+    },
+    {
+      "id": 18,
+      "kode_barang": "ALMFL50W",
+      "nama_barang": "Lampu Flood 50W",
+      "satuan": "pcs",
+      "harga_satuan": 120000
+    },
+    {
+      "id": 19,
+      "kode_barang": "AM53",
+      "nama_barang": "Paku AM53",
+      "satuan": "kantong",
+      "harga_satuan": 20000
+    },
+    {
+      "id": 20,
+      "kode_barang": "AMBUL",
+      "nama_barang": "Asbes Multilayer",
+      "satuan": "lembar",
+      "harga_satuan": 30000
+    },
+    {
+      "id": 21,
+      "kode_barang": "AMINB",
+      "nama_barang": "Alumunium Inbow",
+      "satuan": "pcs",
+      "harga_satuan": 10000
+    },
+    {
+      "id": 22,
+      "kode_barang": "AMRHM",
+      "nama_barang": "Hose Roll Merk AMRHM",
+      "satuan": "meter",
+      "harga_satuan": 25000
+    },
+    {
+      "id": 23,
+      "kode_barang": "AMRKM",
+      "nama_barang": "Roll Meteran AMRKM",
+      "satuan": "meter",
+      "harga_satuan": 20000
+    },
+    {
+      "id": 24,
+      "kode_barang": "ARBTGB",
+      "nama_barang": "Bracket GB",
+      "satuan": "pcs",
+      "harga_satuan": 5000
+    },
+    {
+      "id": 25,
+      "kode_barang": "ARJNB",
+      "nama_barang": "Joiner NB",
+      "satuan": "pcs",
+      "harga_satuan": 3000
+    },
+    {
+      "id": 26,
+      "kode_barang": "ARKC",
+      "nama_barang": "Klem C",
+      "satuan": "pcs",
+      "harga_satuan": 3000
+    },
+    {
+      "id": 27,
+      "kode_barang": "ARNSK",
+      "nama_barang": "Siku NK",
+      "satuan": "pcs",
+      "harga_satuan": 4000
+    },
+    {
+      "id": 28,
+      "kode_barang": "ARSPT",
+      "nama_barang": "Stop Kontak ARSPT",
+      "satuan": "pcs",
+      "harga_satuan": 15000
+    },
+    {
+      "id": 29,
+      "kode_barang": "ARTCO",
+      "nama_barang": "Torco Set",
+      "satuan": "set",
+      "harga_satuan": 75000
+    },
+    {
+      "id": 30,
+      "kode_barang": "ASHHITEMP",
+      "nama_barang": "Cat Anti Panas",
+      "satuan": "kaleng",
+      "harga_satuan": 95000
+    },
+    {
+      "id": 31,
+      "kode_barang": "ASHMT",
+      "nama_barang": "Cat Metal",
+      "satuan": "kaleng",
+      "harga_satuan": 75000
+    },
+    {
+      "id": 32,
+      "kode_barang": "ASHST",
+      "nama_barang": "Cat Strip",
+      "satuan": "kaleng",
+      "harga_satuan": 60000
+    },
+    {
+      "id": 33,
+      "kode_barang": "AV100",
+      "nama_barang": "Cat AV 100",
+      "satuan": "kaleng",
+      "harga_satuan": 85000
+    },
+    {
+      "id": 34,
+      "kode_barang": "AV1K",
+      "nama_barang": "Cat AV 1K",
+      "satuan": "kaleng",
+      "harga_satuan": 85000
+    },
+    {
+      "id": 35,
+      "kode_barang": "AV200",
+      "nama_barang": "Cat AV 200",
+      "satuan": "kaleng",
+      "harga_satuan": 90000
     }
 ]

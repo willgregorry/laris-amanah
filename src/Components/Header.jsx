@@ -13,11 +13,11 @@ export default function Header() {
     day: "numeric",
     month: "long",
     year: "numeric",
-  });  
+  });
 
   return (
     <div>
-      <Navbar>
+      <Navbar style={{ borderBottom: "4px solid #16423C" }}>
         <Container style={{ height: "75px" }}>
           <div
             style={{
@@ -30,7 +30,6 @@ export default function Header() {
               style={{
                 justifyContent: "center",
                 cursor: "pointer",
-                fontFamily: "poppins",
                 fontWeight: "500",
                 fontSize: "16px",
               }}
@@ -73,7 +72,7 @@ export default function Header() {
             <div
               style={{
                 display: "flex",
-                flexDirection:'row',
+                flexDirection: "row",
                 margin: "4px",
                 width: "35px",
                 height: "35px",
