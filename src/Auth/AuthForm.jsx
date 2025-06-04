@@ -90,7 +90,12 @@ function AuthForm() {
           fontFamily: "Poppins, sans-serif",
         }}
       >
-        <img src="logo.png" alt="logo" width={50} style={{marginBottom: '12px'}}/>
+        <img
+          src="logo.png"
+          alt="logo"
+          width={50}
+          style={{ marginBottom: "12px" }}
+        />
         <h3 style={{ marginBottom: "12px", color: colors.text }}>Login</h3>
         <p style={{ color: "gray", fontSize: "14px" }}>
           Gunakan email dan kata sandi Anda untuk mengakses akun!

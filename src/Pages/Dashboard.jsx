@@ -1,15 +1,22 @@
 import React, { useState } from "react";
 import Header from "./../Components/Header";
 import TableInfo from "./TableInfo";
+import TransactionForm from "../Components/TransactionForm";
 import data from "./../data.json"; // Import the data here
 
 function Dashboard() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredData = data.filter((item) => {
-    const nameMatch = item.nama_barang.toLowerCase().includes(searchTerm.toLowerCase());
-    const kodeMatch = item.kode_barang.toLowerCase().includes(searchTerm.toLowerCase());
-    const satuanMatch = item.satuan.toLowerCase().includes(searchTerm.toLowerCase());
+    const nameMatch = item.nama_barang
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    const kodeMatch = item.kode_barang
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    const satuanMatch = item.satuan
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
 
     const priceAsNumber = Number(searchTerm.replace(/[^0-9]/g, ""));
     const priceMatch =
@@ -36,31 +43,45 @@ function Dashboard() {
         Selamat datang kembali, {localStorage.getItem("profile_name")}!
       </h5>
 
-      <input
-        type="text"
-        placeholder="Cari ..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        style={{
-          fontFamily: "Poppins",
-          borderRadius: "8px",
-          height: "30px",
-          marginBottom: "16px",
-          padding: "8px",
-          width: "1115px",
-          marginLeft: "34px",
-        }}
-      />
-
       <div
         style={{
-          marginLeft: "2em",
-          marginRight: "2em",
-          width: "75%",
+          display: "flex",
+          flexDirection: "row",
           height: "70%",
         }}
       >
-        <TableInfo data={filteredData} />
+        <div
+          style={{
+            marginLeft: "2em",
+            marginRight: "2em",
+            width: "65%",
+          }}
+        >
+          <input
+            type="text"
+            placeholder="Cari ..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={{
+              fontFamily: "Poppins",
+              borderRadius: "8px",
+              height: "30px",
+              marginBottom: "16px",
+              padding: "8px",
+              width: "100%",
+            }}
+          />
+          <TableInfo data={filteredData} />
+        </div>
+        <div
+        className="rounded-5"
+          style={{
+            backgroundColor: "white",
+            width: "28%",
+          }}
+        >
+          <TransactionForm />
+        </div>
       </div>
     </div>
   );
