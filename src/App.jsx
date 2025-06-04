@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AuthForm from './Auth/AuthForm';
 import Dashboard from './Pages/Dashboard';
 import Report from './Pages/Report';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 function App() {
   return (
