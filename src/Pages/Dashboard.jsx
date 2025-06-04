@@ -57,7 +57,7 @@ function Dashboard() {
           marginLeft: "2em",
           marginRight: "2em",
           width: "75%",
-          height: "75%",
+          height: "70%",
         }}
       >
         <TableInfo data={filteredData} />

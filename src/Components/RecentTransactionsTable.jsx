@@ -5,9 +5,7 @@ const transactionsSectionTitleStyle = {
   color: '#16423C',
   fontWeight: '600',
   fontFamily: 'Poppins, sans-serif',
-  marginBottom: '1rem',
   fontSize: '1.25rem',
-  marginTop: '2rem',
 };
 
 const customTableHeaderStyle = {
