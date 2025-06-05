@@ -78,6 +78,7 @@ function Dashboard() {
           style={{
             backgroundColor: "white",
             width: "28%",
+            border: '1px solid #16423C',
           }}
         >
           <TransactionForm />
