@@ -1,30 +1,21 @@
 import React from 'react';
 
-// Komponen kecil untuk menampung CSS kustom kita.
-// Ini adalah cara rapi untuk memasukkan blok <style> di dalam JSX.
 const CustomScrollbarCSS = () => (
   <style>{`
-    /* Menargetkan elemen dengan class .custom-scrollbar */
     .custom-scrollbar::-webkit-scrollbar {
-      width: 12px; /* Lebar scrollbar */
+      width: 12px; 
     }
-
-    /* Style untuk track (latar belakang) */
     .custom-scrollbar::-webkit-scrollbar-track {
-      background: #f1f1f1; /* Warna latar yang sangat terang */
+      background: #f1f1f1; 
     }
-
-    /* Style untuk thumb (bagian yang bisa digeser) */
     .custom-scrollbar::-webkit-scrollbar-thumb {
-      background-color: #888; /* Warna abu-abu */
-      border-radius: 10px; /* Membuat ujungnya melengkung */
-      border: 3px solid #f1f1f1; /* Memberi jarak antara thumb dan track */
+      background-color: #888; 
+      border-radius: 10px;
+      border: 3px solid #f1f1f1; 
     }
-
-    /* Style untuk thumb saat di-hover */
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-      background-color: #555; /* Warna menjadi lebih gelap */
-    }
+      background-color: #555;
+    } 
   `}</style>
 );
 
@@ -38,14 +29,12 @@ export default function TableReport({ data }) {
   }
 
   return (
-    // Kita gunakan React Fragment (<>) untuk membungkus style dan div utama
     <>
       <CustomScrollbarCSS />
       <div
-        className="custom-scrollbar" // Terapkan class di sini
+        className="custom-scrollbar"
         style={{
-          // Mengubah maxHeight ke pixel agar lebih terprediksi
-          maxHeight: "450px", 
+          maxHeight: "264px", 
           overflowY: "auto",
           border: "1px solid #ddd",
           borderRadius: "8px",
@@ -69,7 +58,6 @@ export default function TableReport({ data }) {
               color: "white",
             }}
           >
-            {/* Isi thead tidak berubah */}
             <tr>
               <th style={{ padding: "12px", border: "1px solid #ddd", textAlign: "left" }}>
                 Nama Pelanggan
@@ -89,7 +77,6 @@ export default function TableReport({ data }) {
             </tr>
           </thead>
           <tbody>
-            {/* Isi tbody tidak berubah */}
             {data.map((row, index) => (
               <tr
                 key={row.id}

@@ -6,6 +6,7 @@ const transactionsSectionTitleStyle = {
   fontWeight: '600',
   fontFamily: 'Poppins, sans-serif',
   fontSize: '1.25rem',
+  marginBottom: '1rem'
 };
 
 function RecentTransactionsTable({ transactions }) {

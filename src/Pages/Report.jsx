@@ -4,6 +4,7 @@
   import SummaryCard from "./../Components/SummaryCard";
   import RecentTransactionsTable from "./../Components/RecentTransactionsTable";
 
+  // akan disesuaikan saat ada be 
   const mockSummaryData = {
     totalRevenue: { value: 23570000, change: 2.0, currency: "Rp" },
     todaySales: { value: 2340000, change: -1.5, currency: "Rp" },
@@ -43,6 +44,54 @@
       totalPurchase: 1200000,
       jumlah: 20, 
     },
+    {
+      id: 4,
+      customerName: "Dewi Anggraini",
+      itemCode: "KRMW01",
+      itemName: "Keramik Lantai Motif Kayu 40x40",
+      totalPurchase: 1200000,
+      jumlah: 20, 
+    },
+    {
+      id: 4,
+      customerName: "Dewi Anggraini",
+      itemCode: "KRMW01",
+      itemName: "Keramik Lantai Motif Kayu 40x40",
+      totalPurchase: 1200000,
+      jumlah: 20, 
+    },
+    {
+      id: 4,
+      customerName: "Dewi Anggraini",
+      itemCode: "KRMW01",
+      itemName: "Keramik Lantai Motif Kayu 40x40",
+      totalPurchase: 1200000,
+      jumlah: 20, 
+    },
+    {
+      id: 4,
+      customerName: "Dewi Anggraini",
+      itemCode: "KRMW01",
+      itemName: "Keramik Lantai Motif Kayu 40x40",
+      totalPurchase: 1200000,
+      jumlah: 20, 
+    },
+    {
+      id: 4,
+      customerName: "Dewi Anggraini",
+      itemCode: "KRMW01",
+      itemName: "Keramik Lantai Motif Kayu 40x40",
+      totalPurchase: 1200000,
+      jumlah: 20, 
+    },
+    {
+      id: 4,
+      customerName: "Dewi Anggraini",
+      itemCode: "KRMW01",
+      itemName: "Keramik Lantai Motif Kayu 40x40",
+      totalPurchase: 1200000,
+      jumlah: 20, 
+    },
   ];
 
   const pageTitleStyle = {
@@ -50,12 +99,13 @@
     fontWeight: "600",
     fontFamily: "Poppins, sans-serif",
     fontSize: '1.25rem',
+    marginBottom: '1rem' 
   };
 
   const buttonContainerStyle = {
   display: 'flex',
   justifyContent: 'center',
-  marginTop: '20px', 
+  marginTop: '28px', 
 };
 
   function ReportPage() {
@@ -111,9 +161,8 @@
       <div
         className="m-4 rounded-4"
         style={{
-          height: "93vh",
           backgroundColor: "#C4DAD2",
-          overflowY: 'auto'
+          paddingBottom: '20px' 
         }}
       >
         <Header />
@@ -157,7 +206,7 @@
           
           <RecentTransactionsTable transactions={recentTransactions} />
 
-          {/* --- PERUBAHAN 2: Tombol ditambahkan di sini --- */}
+          {}
           <div style={buttonContainerStyle}>
             <Button
               variant="success"
