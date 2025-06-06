@@ -1,221 +1,182 @@
-  import React, { useState, useEffect } from "react";
-  import { Container, Row, Col, Button } from "react-bootstrap";
-  import Header from "./../Components/Header";
-  import SummaryCard from "./../Components/SummaryCard";
-  import RecentTransactionsTable from "./../Components/RecentTransactionsTable";
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col, Button, Form, Spinner } from "react-bootstrap";
+import Header from "./../Components/Header";
+import SummaryCard from "./../Components/SummaryCard";
+import RecentTransactionsTable from "./../Components/RecentTransactionsTable";
+import DateFilter from "../Components/DateFilter";
 
-  // akan disesuaikan saat ada be 
-  const mockSummaryData = {
-    totalRevenue: { value: 23570000, change: 2.0, currency: "Rp" },
-    todaySales: { value: 2340000, change: -1.5, currency: "Rp" },
-    profitPercentage: { value: 15.5, label: "Persentase Laba", isProfit: true },
-  };
+// tunggu be 
+const mockAllTransactions = [
+  { id: 1, customerName: "Budi Santoso", itemCode: "A300A", itemName: "Besi Beton A300 10mm", totalPurchase: 750000, jumlah: 15, date: '6-06-2025'},
+  { id: 2, customerName: "Ani Wijaya", itemCode: "P005K", itemName: "Paku Kayu 5cm Box", totalPurchase: 250000, jumlah: 5, date: '6-06-2025'},
+  { id: 3, customerName: "Citra Lestari", itemCode: "PVC012", itemName: "Pipa PVC 1/2 inch per mtr", totalPurchase: 150000, jumlah: 100, date: '5-06-2025'},
+  { id: 4, customerName: "Dewi Anggraini", itemCode: "KRMW01", itemName: "Keramik Lantai Motif Kayu 40x40", totalPurchase: 1200000, jumlah: 20, date: '05-06-2025'},
+  { id: 5, customerName: "Eko Prasetyo", itemCode: "CAT01", itemName: "Cat Tembok Putih 5kg", totalPurchase: 350000, jumlah: 10, date: '15-05-2025'},
+  { id: 6, customerName: "Budi Santoso", itemCode: "A300A", itemName: "Besi Beton A300 10mm", totalPurchase: 500000, jumlah: 10, date: '20-05-2025'},
+];
 
-  const mockRecentTransactions = [
-    {
-      id: 1,
-      customerName: "Budi Santoso",
-      itemCode: "A300A",
-      itemName: "Besi Beton A300 10mm",
-      totalPurchase: 750000,
-      jumlah: 15, 
-    },
-    {
-      id: 2,
-      customerName: "Ani Wijaya",
-      itemCode: "P005K",
-      itemName: "Paku Kayu 5cm Box",
-      totalPurchase: 250000,
-      jumlah: 5, 
-    },
-    {
-      id: 3,
-      customerName: "Citra Lestari",
-      itemCode: "PVC012",
-      itemName: "Pipa PVC 1/2 inch per mtr",
-      totalPurchase: 150000,
-      jumlah: 100, 
-    },
-    {
-      id: 4,
-      customerName: "Dewi Anggraini",
-      itemCode: "KRMW01",
-      itemName: "Keramik Lantai Motif Kayu 40x40",
-      totalPurchase: 1200000,
-      jumlah: 20, 
-    },
-    {
-      id: 4,
-      customerName: "Dewi Anggraini",
-      itemCode: "KRMW01",
-      itemName: "Keramik Lantai Motif Kayu 40x40",
-      totalPurchase: 1200000,
-      jumlah: 20, 
-    },
-    {
-      id: 4,
-      customerName: "Dewi Anggraini",
-      itemCode: "KRMW01",
-      itemName: "Keramik Lantai Motif Kayu 40x40",
-      totalPurchase: 1200000,
-      jumlah: 20, 
-    },
-    {
-      id: 4,
-      customerName: "Dewi Anggraini",
-      itemCode: "KRMW01",
-      itemName: "Keramik Lantai Motif Kayu 40x40",
-      totalPurchase: 1200000,
-      jumlah: 20, 
-    },
-    {
-      id: 4,
-      customerName: "Dewi Anggraini",
-      itemCode: "KRMW01",
-      itemName: "Keramik Lantai Motif Kayu 40x40",
-      totalPurchase: 1200000,
-      jumlah: 20, 
-    },
-    {
-      id: 4,
-      customerName: "Dewi Anggraini",
-      itemCode: "KRMW01",
-      itemName: "Keramik Lantai Motif Kayu 40x40",
-      totalPurchase: 1200000,
-      jumlah: 20, 
-    },
-    {
-      id: 4,
-      customerName: "Dewi Anggraini",
-      itemCode: "KRMW01",
-      itemName: "Keramik Lantai Motif Kayu 40x40",
-      totalPurchase: 1200000,
-      jumlah: 20, 
-    },
-  ];
-
-  const pageTitleStyle = {
-    color: "#16423C",
-    fontWeight: "600",
-    fontFamily: "Poppins, sans-serif",
-    fontSize: '1.25rem',
-  };
-
-  const buttonContainerStyle = {
-  display: 'flex',
-  justifyContent: 'center',
-  marginTop: '28px', 
+const pageTitleStyle = {
+  color: "#16423C",
+  fontWeight: "600",
+  fontFamily: "Poppins, sans-serif",
+  fontSize: '1.25rem',
+  marginBottom: '1rem',
 };
 
-  function ReportPage() {
-    const [summaryData, setSummaryData] = useState(null);
-    const [recentTransactions, setRecentTransactions] = useState([]);
+const titleAndFilterRowStyle = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  gap: '1rem',
+};
 
-    useEffect(() => {
-      setSummaryData(mockSummaryData);
-      setRecentTransactions(mockRecentTransactions);
-    }, []);
+const buttonContainerStyle = {
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: '28px',
+};
 
-    const handleDownloadReport = () => {
-      if (recentTransactions.length === 0) {
-        alert("Tidak ada data transaksi untuk di-download.");
-        return;
-      }
-      const headers = ["Nama Pelanggan", "Kode Barang", "Nama Barang", "Jumlah", "Total Belanja (Rp)"];
-      const rows = recentTransactions.map((transaction) =>
-        [
-          `"${transaction.customerName.replace(/"/g, '""')}"`,
-          transaction.itemCode,
-          `"${transaction.itemName.replace(/"/g, '""')}"`,
-          transaction.totalPurchase,
-        ].join(",")
-      );
-      const csvContent = [headers.join(","), ...rows].join("\n");
-      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-      const link = document.createElement("a");
-      if (link.download !== undefined) {
-        const url = URL.createObjectURL(blob);
-        link.setAttribute("href", url);
-        link.setAttribute("download", "laporan_penjualan.csv");
-        link.style.visibility = "hidden";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-      } else {
-        alert("Browser Anda tidak mendukung fitur download otomatis. Silakan coba browser lain.");
-      }
-    };
+function ReportPage() {
+  const [summaryData, setSummaryData] = useState(null);
+  const [filteredTransactions, setFilteredTransactions] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [filter, setFilter] = useState({
+    day: 'all',
+    month: '6',
+    year: '2025',
+  });
 
-    if (!summaryData) {
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilter(prevFilter => ({
+      ...prevFilter,
+      [name]: value,
+    }));
+  };
+
+  useEffect(() => {
+    setIsLoading(true);
+    setTimeout(() => {
+      const newFilteredTransactions = mockAllTransactions.filter(t => {
+        const [transactionDay, transactionMonth, transactionYear] = t.date.split('-');
+        const yearMatch = +transactionYear === +filter.year;
+        const monthMatch = +transactionMonth === +filter.month;
+        const dayMatch = filter.day === 'all' || +transactionDay === +filter.day;
+        return yearMatch && monthMatch && dayMatch;
+      });
+
+      setFilteredTransactions(newFilteredTransactions);
+
+      const totalCustomers = new Set(newFilteredTransactions.map(t => t.customerName)).size;
+      const totalSales = newFilteredTransactions.reduce((sum, t) => sum + t.totalPurchase, 0);
+      setSummaryData({
+        totalCustomers: { value: totalCustomers, change: 0 },
+        todaySales: { value: totalSales, change: 0, currency: "Rp" },
+        profitPercentage: { value: 15.5, label: "Persentase Laba", isProfit: true },
+      });
+      setIsLoading(false);
+    }, 300);
+  }, [filter]);
+
+  const handleDownloadReport = () => {
+    if (!filteredTransactions || filteredTransactions.length === 0) {
+      alert("Tidak ada data transaksi untuk di-download.");
+      return;
+    }
+    const headers = ["Nama Pelanggan", "Kode Barang", "Nama Barang", "Jumlah", "Total Belanja (Rp)"];
+    const rows = filteredTransactions.map((transaction) =>
+      [
+        `"${transaction.customerName.replace(/"/g, '""')}"`,
+        transaction.itemCode,
+        `"${transaction.itemName.replace(/"/g, '""')}"`,
+        transaction.jumlah,
+        transaction.totalPurchase,
+      ].join(",")
+    );
+    const csvContent = [headers.join(","), ...rows].join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    if (link.download !== undefined) {
+      const url = URL.createObjectURL(blob);
+      link.setAttribute("href", url);
+      link.setAttribute("download", `laporan_penjualan_${filter.year}-${filter.month}-${filter.day}.csv`);
+      link.style.visibility = "hidden";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    } else {
+      alert("Browser Anda tidak mendukung fitur download otomatis.");
+    }
+  };
+
+  if (!summaryData) {
     return (
-      <p style={{ textAlign: "center", marginTop: "5rem" }}>
-        Memuat data laporan...
-      </p>
+        <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+            <Spinner animation="border" variant="success" />
+            <p className="ms-3">Mempersiapkan laporan...</p>
+        </div>
     );
   }
 
-    return (
-    <Container fluid className="p-0" style={{height: '96.6vh'}}>
+  return (
+    <Container fluid className="p-0">
       <div
         className="m-4 rounded-4"
         style={{
           backgroundColor: "#C4DAD2",
-          paddingBottom: '4px'
+          paddingBottom: '20px'
         }}
       >
         <Header />
         <div style={{ padding: "20px" }}>
           
-          {}
-          <div>
-            <h2 style={pageTitleStyle}>Laporan Penjualan, !</h2>
+          <div style={titleAndFilterRowStyle}>
+            <h2 style={{...pageTitleStyle, marginBottom: 0}}>Laporan Penjualan, !</h2>
+            <DateFilter filter={filter} onFilterChange={handleFilterChange} />
           </div>
 
-          <Row className="mt-3">
+          <Row className="my-4">
             <Col md={4} className="mb-3">
               <SummaryCard
-                title="Total Pendapatan"
-                value={`${summaryData.totalRevenue.currency} ${summaryData.totalRevenue.value.toLocaleString("id-ID")}`}
-                change={summaryData.totalRevenue.change}
-                icon="bi-cash-coin"
+                title="Total Pelanggan"
+                value={summaryData.totalCustomers.value}
+                icon="bi-people-fill"
               />
             </Col>
             <Col md={4} className="mb-3">
               <SummaryCard
-                title="Penjualan Hari Ini"
+                title="Total Penjualan"
                 value={`${summaryData.todaySales.currency} ${summaryData.todaySales.value.toLocaleString("id-ID")}`}
-                change={summaryData.todaySales.change}
-                icon="bi-calendar-day"
+                icon="bi-calendar-check"
               />
             </Col>
             <Col md={4} className="mb-3">
               <SummaryCard
                 title={summaryData.profitPercentage.label}
-                value={`${summaryData.profitPercentage.value.toLocaleString("id-ID", {
-                  style: "decimal",
-                  minimumFractionDigits: 1,
-                  maximumFractionDigits: 1,
-                })}%`}
+                value={`${summaryData.profitPercentage.value}%`}
                 isProfit={summaryData.profitPercentage.isProfit}
                 icon={summaryData.profitPercentage.isProfit ? "bi-graph-up-arrow" : "bi-graph-down-arrow"}
               />
             </Col>
           </Row>
           
-          <RecentTransactionsTable transactions={recentTransactions} />
-
-          {}
+          {isLoading ? (
+            <div className="text-center p-5"><Spinner animation="border" variant="success" /></div>
+          ) : (
+            <RecentTransactionsTable transactions={filteredTransactions} />
+          )}
+          
           <div style={buttonContainerStyle}>
             <Button
               variant="success"
               onClick={handleDownloadReport}
               style={{ backgroundColor: "#16423C", borderColor: "#16423C" }}
+              disabled={isLoading || filteredTransactions.length === 0}
             >
               <i className="bi bi-download me-2"></i>Download Laporan
             </Button>
           </div>
-
         </div>
       </div>
     </Container>
