@@ -3,7 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 
 const summaryCardCustomStyle = {
   backgroundColor: '#f8f9fa',
-  border: '1px solid #dee2e6',
+  border: '1px solid #16423C',
   borderLeft: '5px solid #16423C', 
   borderRadius: '4px',
   padding: '15px',
