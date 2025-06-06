@@ -156,7 +156,7 @@
   }
 
     return (
-    <Container fluid className="p-0">
+    <Container fluid className="p-0" style={{height: '96.6vh'}}>
       <div
         className="m-4 rounded-4"
         style={{

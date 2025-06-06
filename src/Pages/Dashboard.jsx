@@ -28,7 +28,7 @@ function Dashboard() {
   return (
     <div
       className="m-4 rounded-4"
-      style={{ height: "93vh", width: "", backgroundColor: "#C4DAD2" }}
+      style={{ height: "93.3vh", width: "", backgroundColor: "#C4DAD2" }}
     >
       <Header />
       <h5
