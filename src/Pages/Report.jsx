@@ -99,7 +99,6 @@
     fontWeight: "600",
     fontFamily: "Poppins, sans-serif",
     fontSize: '1.25rem',
-    marginBottom: '1rem' 
   };
 
   const buttonContainerStyle = {
@@ -162,7 +161,7 @@
         className="m-4 rounded-4"
         style={{
           backgroundColor: "#C4DAD2",
-          paddingBottom: '20px' 
+          paddingBottom: '4px'
         }}
       >
         <Header />
@@ -173,7 +172,7 @@
             <h2 style={pageTitleStyle}>Laporan Penjualan, !</h2>
           </div>
 
-          <Row className="my-4">
+          <Row className="mt-3">
             <Col md={4} className="mb-3">
               <SummaryCard
                 title="Total Pendapatan"
