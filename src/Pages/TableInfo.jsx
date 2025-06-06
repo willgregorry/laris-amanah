@@ -1,4 +1,4 @@
-export default function TableInfo({ data }) {
+export default function TableInfo({ data, onAdd, onRemove }) {
   return (
     <div
       style={{
@@ -104,13 +104,68 @@ export default function TableInfo({ data }) {
               <td style={{ padding: "12px", border: "1px solid #ddd" }}>
                 {row.nama_barang}
               </td>
-              <td style={{ padding: "12px", border: "1px solid #ddd", textAlign: "center",}}>
+              <td
+                style={{
+                  padding: "12px",
+                  border: "1px solid #ddd",
+                  textAlign: "center",
+                }}
+              >
                 {row.satuan}
               </td>
-              <td style={{ padding: "12px", border: "1px solid #ddd", textAlign: "center",}}>
+              <td
+                style={{
+                  padding: "12px",
+                  border: "1px solid #ddd",
+                  textAlign: "center",
+                }}
+              >
                 {"Rp " + row.harga_satuan.toLocaleString("id-ID") + ",00"}
               </td>
-              <td style={{ padding: "12px", border: "1px solid #ddd" }}></td>
+              <td
+                style={{
+                  padding: "12px",
+                  border: "1px solid #ddd",
+                  textAlign: "center",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "16px",
+                  }}
+                >
+                  <button
+                    className="btn btn-outline-success rounded-circle d-flex justify-content-center align-items-center"
+                    style={{
+                      width: "25px",
+                      height: "25px",
+                      fontWeight: "bold",
+                      fontSize: "16px",
+                      padding: 0,
+                    }}
+                    onClick={() => onAdd(row)}
+                  >
+                    +
+                  </button>
+                  <button
+                    className="btn btn-outline-danger rounded-circle d-flex justify-content-center align-items-center"
+                    style={{
+                      width: "25px",
+                      height: "25px",
+                      fontWeight: "bold",
+                      fontSize: "16px",
+                      padding: 0,
+                    }}
+                    onClick={() => onRemove(row.kode_barang)}
+                  >
+                    −
+                  </button>
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>

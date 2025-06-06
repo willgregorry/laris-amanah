@@ -3,7 +3,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 import { Container, Form, Button } from "react-bootstrap";
 
-export default function TransactionForm() {
+export default function TransactionForm({ orders }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -58,6 +58,11 @@ export default function TransactionForm() {
       }
     }
   };
+
+  const total = orders.reduce(
+    (sum, item) => sum + item.harga_satuan * item.qty,
+    0
+  );
 
   // useEffect(() => {
   //   axios
@@ -132,8 +137,19 @@ export default function TransactionForm() {
               border: "1px solid #C4DAD2",
               width: "100%",
               height: "180px",
+              overflowY: 'auto'
             }}
-          ></div>
+          >
+            {orders.map((item) => (
+              <div key={item.kode_barang} style={{fontSize: '12px', marginBottom: "4px", margin: '8px' }}>
+                {item.qty}x {item.nama_barang} ({item.satuan}) - Rp{" "}
+                {item.harga_satuan.toLocaleString("id-ID")}
+              </div>
+            ))}
+            {orders.length === 0 && (
+              <p style={{fontSize: '12px', marginBottom: "4px", margin: '8px', color: 'gray' }}>Belum ada item.</p>
+            )}
+          </div>
 
           <p
             style={{
@@ -151,7 +167,7 @@ export default function TransactionForm() {
             style={{
               display: "flex",
               flexDirection: "row",
-              justifyContent: 'space-between',
+              justifyContent: "space-between",
               backgroundColor: "whitesmoke",
               border: "1px solid #C4DAD2",
               width: "100%",
@@ -171,11 +187,11 @@ export default function TransactionForm() {
               style={{
                 marginTop: "14px",
                 marginLeft: "4px",
-                marginRight: '4px',
+                marginRight: "4px",
                 fontSize: "12px",
               }}
             >
-              {"Rp " + "50.000" + ",00"}
+              <span>Rp {total.toLocaleString("id-ID")},00</span>
             </p>
           </div>
 

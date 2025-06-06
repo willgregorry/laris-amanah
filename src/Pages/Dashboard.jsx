@@ -25,6 +25,31 @@ function Dashboard() {
     return nameMatch || priceMatch || kodeMatch || satuanMatch;
   });
 
+  const [orders, setOrders] = useState([]);
+
+  const handleAddItem = (item) => {
+    setOrders((prevOrders) => {
+      const existingItem = prevOrders.find((i) => i.kode_barang === item.kode_barang);
+      if (existingItem) {
+        return prevOrders.map((i) =>
+          i.kode_barang === item.kode_barang ? { ...i, qty: i.qty + 1 } : i
+        );
+      } else {
+        return [...prevOrders, { ...item, qty: 1 }];
+      }
+    });
+  };
+
+  const handleRemoveItem = (kode_barang) => {
+    setOrders((prevOrders) =>
+      prevOrders
+        .map((i) =>
+          i.kode_barang === kode_barang ? { ...i, qty: i.qty - 1 } : i
+        )
+        .filter((i) => i.qty > 0)
+    );
+  };
+
   return (
     <div
       className="m-4 rounded-4"
@@ -71,7 +96,7 @@ function Dashboard() {
               width: "100%",
             }}
           />
-          <TableInfo data={filteredData} />
+          <TableInfo data={filteredData} onAdd={handleAddItem} onRemove={handleRemoveItem} />
         </div>
         <div
         className="rounded-5"
@@ -81,7 +106,7 @@ function Dashboard() {
             border: '1px solid #16423C',
           }}
         >
-          <TransactionForm />
+          <TransactionForm orders={orders}/>
         </div>
       </div>
     </div>
