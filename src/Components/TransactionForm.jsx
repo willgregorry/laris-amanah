@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import dayjs from "dayjs";
-import { Container, Form, Button } from "react-bootstrap";
+import { Container, Form, Button, Modal } from "react-bootstrap";
 
-export default function TransactionForm({ orders }) {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+export default function TransactionForm({ orders, setOrders }) {
+  const [showModal, setShowModal] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
+
   const [formData, setFormData] = useState({
-    product_code: "",
-    product_name: "",
-    cust_name: "",
-    price: "",
+    customer: "",
   });
 
-  // Timestamp
   const [time, setTime] = useState(dayjs().format("HH:mm:ss"));
   useEffect(() => {
     const interval = setInterval(() => {
@@ -35,27 +34,54 @@ export default function TransactionForm({ orders }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const endpoint = `${import.meta.env.VITE_API_BASE_URL}/user/login/`;
+    if (orders.length === 0) {
+      setModalContent("Belum ada produk yang dipilih.");
+      handleShow();
+      return;
+    }
+
+    const timestamp = new Date().toISOString();
+
+    const payload = orders.map((item) => ({
+      customer: formData.customer,
+      produk: item.kode_barang,
+      jumlah: String(item.qty),
+      waktu_transaksi: timestamp,
+    }));
+
+    const endpoint = `${import.meta.env.VITE_API_BASE_URL}/api/transaksi/`;
 
     try {
-      const response = await axios.post(endpoint, formData, {
+      const response = await axios.post(endpoint, payload, {
         headers: {
           "Content-Type": "application/json",
         },
       });
 
-      const result = response.data;
-      console.log("Success:", result);
+      console.log("Transaksi berhasil:", response.data);
+
+      setModalContent(
+        <>
+          <p>
+            Transaksi berhasil untuk <strong>{formData.customer}</strong>
+          </p>
+          <ul>
+            {orders.map((item) => (
+              <li key={item.kode_barang}>
+                {item.qty}x {item.nama_barang}
+              </li>
+            ))}
+          </ul>
+        </>
+      );
+      handleShow();
+      setFormData({ customer: "" });
+      setOrders([]);
+
     } catch (err) {
       console.error("Submission error:", err);
-
-      if (err.response && err.response.data) {
-        setErrorMsg("Transaksi Gagal!");
-        setShowAlert(true);
-      } else {
-        setErrorMsg("Terjadi kesalahan saat mengirim data.");
-        setShowAlert(true);
-      }
+      setModalContent("Lengkapi seluruh field yang masih kosong!");
+      handleShow();
     }
   };
 
@@ -63,19 +89,6 @@ export default function TransactionForm({ orders }) {
     (sum, item) => sum + item.harga_satuan * item.qty,
     0
   );
-
-  // useEffect(() => {
-  //   axios
-  //     .get("https://api.example.com/data")
-  //     .then((response) => {
-  //       setData(response.data);
-  //       setLoading(false);
-  //     })
-  //     .catch((err) => {
-  //       setError(err.message);
-  //       setLoading(false);
-  //     });
-  // }, []);
 
   return (
     <Container>
@@ -107,8 +120,8 @@ export default function TransactionForm({ orders }) {
             <Form.Control
               type="text"
               placeholder="Masukkan nama pelanggan"
-              name="cust_name"
-              value={formData.cust_name}
+              name="customer"
+              value={formData.customer}
               onChange={handleChange}
               className="rounded-5"
               style={{
@@ -137,17 +150,29 @@ export default function TransactionForm({ orders }) {
               border: "1px solid #C4DAD2",
               width: "100%",
               height: "180px",
-              overflowY: 'auto'
+              overflowY: "auto",
             }}
           >
             {orders.map((item) => (
-              <div key={item.kode_barang} style={{fontSize: '12px', marginBottom: "4px", margin: '8px' }}>
+              <div
+                key={item.kode_barang}
+                style={{ fontSize: "12px", marginBottom: "4px", margin: "8px" }}
+              >
                 {item.qty}x {item.nama_barang} ({item.satuan}) - Rp{" "}
                 {item.harga_satuan.toLocaleString("id-ID")}
               </div>
             ))}
             {orders.length === 0 && (
-              <p style={{fontSize: '12px', marginBottom: "4px", margin: '8px', color: 'gray' }}>Belum ada item.</p>
+              <p
+                style={{
+                  fontSize: "12px",
+                  marginBottom: "4px",
+                  margin: "8px",
+                  color: "gray",
+                }}
+              >
+                Belum ada item.
+              </p>
             )}
           </div>
 
@@ -203,12 +228,24 @@ export default function TransactionForm({ orders }) {
               backgroundColor: "#16423C",
               color: "white",
               border: "none",
-              marginTop: "10px",
+              marginTop: "20px",
             }}
           >
             Transaksi
           </Button>
         </Form>
+
+        <Modal show={showModal} onHide={handleClose} centered>
+          <Modal.Header closeButton>
+            <Modal.Title>Status Transaksi</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>{modalContent}</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Tutup
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     </Container>
   );

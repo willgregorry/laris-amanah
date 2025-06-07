@@ -65,7 +65,7 @@ function Dashboard() {
           marginLeft: "34px",
         }}
       >
-        Selamat datang kembali, {localStorage.getItem("profile_name")}!
+        Selamat datang, {localStorage.getItem("profile_name")}!
       </h5>
 
       <div
@@ -106,7 +106,7 @@ function Dashboard() {
             border: '1px solid #16423C',
           }}
         >
-          <TransactionForm orders={orders}/>
+          <TransactionForm orders={orders} setOrders={setOrders} />
         </div>
       </div>
     </div>

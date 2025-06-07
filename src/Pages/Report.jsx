@@ -125,6 +125,8 @@ function ReportPage() {
         className="m-4 rounded-4"
         style={{
           backgroundColor: "#C4DAD2",
+          // backgroundColor: 'red',
+          height: '93.3vh',
           paddingBottom: '20px'
         }}
       >

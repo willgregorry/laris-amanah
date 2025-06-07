@@ -29,7 +29,7 @@ export default function DateFilter({ filter, onFilterChange }) {
         name="day" 
         value={filter.day} 
         onChange={onFilterChange} 
-        style={{ minWidth: '100px' }}
+        style={{ minWidth: '100px', cursor: 'pointer' }}
         aria-label="Pilih Tanggal"
       >
         {days.map(day => (
@@ -44,7 +44,7 @@ export default function DateFilter({ filter, onFilterChange }) {
         name="month" 
         value={filter.month} 
         onChange={onFilterChange} 
-        style={{ minWidth: '100px' }}
+        style={{ minWidth: '100px', cursor: 'pointer' }}
         aria-label="Pilih Bulan"
       >
         {months.map(month => (
@@ -59,7 +59,7 @@ export default function DateFilter({ filter, onFilterChange }) {
         name="year" 
         value={filter.year} 
         onChange={onFilterChange} 
-        style={{ minWidth: '100px' }}
+        style={{ minWidth: '100px', cursor: 'pointer' }}
         aria-label="Pilih Tahun"
       >
         {years.map(year => (
