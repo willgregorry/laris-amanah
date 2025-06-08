@@ -29,16 +29,6 @@ export default function TableInfo({ data, onAdd, onRemove }) {
           <tr>
             <th
               style={{
-                width: "50px",
-                padding: "12px",
-                border: "1px solid #ddd",
-                textAlign: "center",
-              }}
-            >
-              ID
-            </th>
-            <th
-              style={{
                 width: "120px",
                 padding: "12px",
                 border: "1px solid #ddd",
@@ -64,6 +54,16 @@ export default function TableInfo({ data, onAdd, onRemove }) {
               }}
             >
               Satuan
+            </th>
+            <th
+              style={{
+                width: "50px",
+                padding: "12px",
+                border: "1px solid #ddd",
+                textAlign: "center",
+              }}
+            >
+              Stok
             </th>
             <th
               style={{
@@ -96,9 +96,6 @@ export default function TableInfo({ data, onAdd, onRemove }) {
               }}
             >
               <td style={{ padding: "12px", border: "1px solid #ddd" }}>
-                {row.id}
-              </td>
-              <td style={{ padding: "12px", border: "1px solid #ddd" }}>
                 {row.kode_barang}
               </td>
               <td style={{ padding: "12px", border: "1px solid #ddd" }}>
@@ -112,6 +109,9 @@ export default function TableInfo({ data, onAdd, onRemove }) {
                 }}
               >
                 {row.satuan}
+              </td>
+              <td style={{ padding: "12px", border: "1px solid #ddd" }}>
+                {row.stok}
               </td>
               <td
                 style={{

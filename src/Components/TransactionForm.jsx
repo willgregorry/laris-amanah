@@ -3,7 +3,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 import { Container, Form, Button, Modal } from "react-bootstrap";
 
-export default function TransactionForm({ orders, setOrders }) {
+export default function TransactionForm({ orders, setOrders, refreshData }) {
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState("");
 
@@ -77,6 +77,7 @@ export default function TransactionForm({ orders, setOrders }) {
       handleShow();
       setFormData({ customer: "" });
       setOrders([]);
+      refreshData();
 
     } catch (err) {
       console.error("Submission error:", err);

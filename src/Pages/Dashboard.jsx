@@ -1,31 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Header from "./../Components/Header";
 import TableInfo from "./TableInfo";
 import TransactionForm from "../Components/TransactionForm";
-import data from "./../data.json"; // Import the data here
 
 function Dashboard() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [dataBarang, setDataBarang] = useState([]);
+  const [orders, setOrders] = useState([]);
 
-  const filteredData = data.filter((item) => {
-    const nameMatch = item.nama_barang
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-    const kodeMatch = item.kode_barang
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-    const satuanMatch = item.satuan
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
+  const endpoint = `${import.meta.env.VITE_API_BASE_URL}/api/produk/`;
+
+  const fetchDataBarang = () => {
+    axios
+      .get(`${import.meta.env.VITE_API_BASE_URL}/api/produk/`)
+      .then((res) => {
+        const processed = res.data.map((item) => ({
+          ...item,
+          harga_satuan: Number(item.harga_satuan),
+        }));
+        setDataBarang(processed);
+      })
+      .catch((err) => {
+        console.error("Gagal fetch data:", err);
+      });
+  };
+
+  useEffect(() => {
+    fetchDataBarang();
+  }, []);
+
+  const filteredData = dataBarang.filter((item) => {
+    const nameMatch = item.nama_barang.toLowerCase().includes(searchTerm.toLowerCase());
+    const kodeMatch = item.kode_barang.toLowerCase().includes(searchTerm.toLowerCase());
+    const satuanMatch = item.satuan.toLowerCase().includes(searchTerm.toLowerCase());
 
     const priceAsNumber = Number(searchTerm.replace(/[^0-9]/g, ""));
-    const priceMatch =
-      !isNaN(priceAsNumber) && item.harga_satuan === priceAsNumber;
+    const priceMatch = !isNaN(priceAsNumber) && item.harga_satuan === priceAsNumber;
 
-    return nameMatch || priceMatch || kodeMatch || satuanMatch;
+    return nameMatch || kodeMatch || satuanMatch || priceMatch;
   });
-
-  const [orders, setOrders] = useState([]);
 
   const handleAddItem = (item) => {
     setOrders((prevOrders) => {
@@ -53,7 +67,7 @@ function Dashboard() {
   return (
     <div
       className="m-4 rounded-4"
-      style={{ height: "93.3vh", width: "", backgroundColor: "#C4DAD2" }}
+      style={{ height: "93.3vh", backgroundColor: "#C4DAD2" }}
     >
       <Header />
       <h5
@@ -68,20 +82,8 @@ function Dashboard() {
         Selamat datang, {localStorage.getItem("profile_name")}!
       </h5>
 
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          height: "70%",
-        }}
-      >
-        <div
-          style={{
-            marginLeft: "2em",
-            marginRight: "2em",
-            width: "65%",
-          }}
-        >
+      <div style={{ display: "flex", flexDirection: "row", height: "70%" }}>
+        <div style={{ marginLeft: "2em", marginRight: "2em", width: "65%" }}>
           <input
             type="text"
             placeholder="Cari ..."
@@ -96,17 +98,25 @@ function Dashboard() {
               width: "100%",
             }}
           />
-          <TableInfo data={filteredData} onAdd={handleAddItem} onRemove={handleRemoveItem} />
+          <TableInfo
+            data={filteredData}
+            onAdd={handleAddItem}
+            onRemove={handleRemoveItem}
+          />
         </div>
         <div
-        className="rounded-5"
+          className="rounded-5"
           style={{
             backgroundColor: "white",
             width: "28%",
-            border: '1px solid #16423C',
+            border: "1px solid #16423C",
           }}
         >
-          <TransactionForm orders={orders} setOrders={setOrders} />
+          <TransactionForm
+            orders={orders}
+            setOrders={setOrders}
+            refreshData={fetchDataBarang}
+          />
         </div>
       </div>
     </div>
