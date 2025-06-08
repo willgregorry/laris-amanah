@@ -2,71 +2,50 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 const summaryCardCustomStyle = {
-  backgroundColor: '#f8f9fa',
-  border: '1px solid #16423C',
-  borderLeft: '5px solid #16423C', 
-  borderRadius: '4px',
-  padding: '15px',
-  height: '100%',
+    backgroundColor: '#f8f9fa',
+    border: '1px solid #16423C',
+    borderLeft: '5px solid #16423C', 
+    borderRadius: '4px',
+    padding: '15px',
+    height: '100%',
 };
 
 const summaryCardIconBaseStyle = {
-  fontSize: '2rem',
-  padding: '10px',
-  borderRadius: '50%',
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: '50px',
-  height: '50px',
-  color: '#fff',
+    fontSize: '2rem',
+    padding: '10px',
+    borderRadius: '50%',
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '50px',
+    height: '50px',
+    color: '#fff',
 };
 
 const summaryCardTitleStyle = {
-  color: '#495057',
-  fontSize: '0.9rem',
-  marginBottom: '5px',
+    color: '#495057',
+    fontSize: '0.9rem',
+    marginBottom: '5px',
 };
 
 const summaryCardValueStyle = {
-  fontSize: '1.5rem',
-  fontWeight: 'bold',
-  color: '#212529',
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+    color: '#212529',
 };
 
 const summaryCardChangeStyle = {
-  fontSize: '0.85rem',
+    fontSize: '0.85rem',
 };
 
-const textProfitStyle = { color: '#16423C' };
 const iconProfitStyle = { backgroundColor: '#16423C' };
 
-const textLossStyle = { color: '#dc3545' };
-const iconLossStyle = { backgroundColor: '#dc3545' };
-
-const textNeutralChangeStyle = { color: '#6c757d' };
-const iconNeutralStyle = { backgroundColor: '#6c757d' };
-
-
-function SummaryCard({ title, value, change, icon, isProfit, detail }) {
-    let changeTextStyle = textNeutralChangeStyle;
-    let iconStyle = {...summaryCardIconBaseStyle, ...iconNeutralStyle};
+function SummaryCard({ title, value, change, icon, detail }) {
+    let iconStyle = {...summaryCardIconBaseStyle, ...iconProfitStyle};
 
     if (change !== undefined && change !== null) {
         const isPositive = change >= 0;
         changeTextStyle = isPositive ? textProfitStyle : textLossStyle;
-    } else if (isProfit !== undefined && isProfit !== null) {
-        iconStyle = isProfit 
-            ? {...summaryCardIconBaseStyle, ...iconProfitStyle} 
-            : {...summaryCardIconBaseStyle, ...iconLossStyle};
-    }
-    
-    if (title === "Total Penjualan") {
-        iconStyle = {...summaryCardIconBaseStyle, ...iconProfitStyle};
-    } else if (title === "Total Pelanggan") {
-        iconStyle = {...summaryCardIconBaseStyle, backgroundColor: '#17a2b8'}; 
-    } else if (title === "Stok Terjual") {
-        iconStyle = {...summaryCardIconBaseStyle, backgroundColor: '#fd7e14'}; 
     }
 
 
