@@ -168,7 +168,7 @@ function ReportPage() {
         <div style={{ padding: "20px" }}>
           <div style={titleAndFilterRowStyle}>
             <h2 style={{ ...pageTitleStyle, marginBottom: 0 }}>
-              Laporan Penjualan, !
+              Laporan Penjualan, {localStorage.getItem("profile_name")}!
             </h2>
             <DateFilter filter={filter} onFilterChange={handleFilterChange} />
           </div>
