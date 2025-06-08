@@ -30,6 +30,11 @@ function RecentTransactionsTable({ transactions }) {
 
   const formattedData = transactions.map((transaction) => ({
     id: transaction.id_transaksi,
+    tanggal: new Date(transaction.waktu_transaksi).toLocaleDateString('id-ID', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }),
     namaPelanggan: transaction.customer,
     kodeBarang: transaction.kode_barang,
     namaBarang: transaction.produk_name,

@@ -79,15 +79,15 @@ function ReportPage() {
           (sum, t) => sum + parseFloat(t.total_harga),
           0
         );
+        const totalStockSold = newFilteredTransactions.reduce(
+          (sum,t) => sum + parseInt(t.jumlah, 10),
+          0
+        );
 
         setSummaryData({
           totalCustomers: { value: totalCustomers, change: 0 },
           todaySales: { value: totalSales, change: 0, currency: "Rp" },
-          profitPercentage: {
-            value: 15.5,
-            label: "Persentase Laba",
-            isProfit: true,
-          },
+          totalStockSold: { value: totalStockSold}
         });
       } catch (error) {
         console.error("Gagal mengambil data transaksi:", error);
@@ -192,14 +192,9 @@ function ReportPage() {
             </Col>
             <Col md={4} className="mb-3">
               <SummaryCard
-                title={summaryData.profitPercentage.label}
-                value={`${summaryData.profitPercentage.value}%`}
-                isProfit={summaryData.profitPercentage.isProfit}
-                icon={
-                  summaryData.profitPercentage.isProfit
-                    ? "bi-graph-up-arrow"
-                    : "bi-graph-down-arrow"
-                }
+                title="Total Produk Terjual"
+                value={summaryData.totalStockSold.value.toLocaleString("id-ID")}
+                icon="bi-box-seam"
               />
             </Col>
           </Row>

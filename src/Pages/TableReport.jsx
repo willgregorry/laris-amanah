@@ -59,6 +59,9 @@ export default function TableReport({ data }) {
             }}
           >
             <tr>
+              <th style={{ width: "120px", padding: "12px", border: "1px solid #ddd", textAlign: "center" }}>
+                Tanggal
+              </th>
               <th style={{ padding: "12px", border: "1px solid #ddd", textAlign: "left" }}>
                 Nama Pelanggan
               </th>
@@ -84,6 +87,9 @@ export default function TableReport({ data }) {
                   backgroundColor: index % 2 === 0 ? "#E9EFEC" : "#f9f9f9",
                 }}
               >
+                <td style={{ padding: "12px", border: "1px solid #ddd", textAlign: "center" }}>
+                  {row.tanggal}
+                </td>
                 <td style={{ padding: "12px", border: "1px solid #ddd", textAlign: "left" }}>
                   {row.namaPelanggan}
                 </td>

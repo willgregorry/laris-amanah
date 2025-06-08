@@ -61,10 +61,12 @@ function SummaryCard({ title, value, change, icon, isProfit, detail }) {
             : {...summaryCardIconBaseStyle, ...iconLossStyle};
     }
     
-    if (title === "Total Pendapatan") {
+    if (title === "Total Penjualan") {
         iconStyle = {...summaryCardIconBaseStyle, ...iconProfitStyle};
-    } else if (title === "Penjualan Hari Ini" && (isProfit === undefined || isProfit === null)) {
-        iconStyle = {...summaryCardIconBaseStyle, ...iconNeutralStyle};
+    } else if (title === "Total Pelanggan") {
+        iconStyle = {...summaryCardIconBaseStyle, backgroundColor: '#17a2b8'}; 
+    } else if (title === "Stok Terjual") {
+        iconStyle = {...summaryCardIconBaseStyle, backgroundColor: '#fd7e14'}; 
     }
 
 
